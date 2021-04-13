@@ -1,0 +1,29 @@
+<h1>Meu dicionário de Inlgês</h1>
+
+<form #wordForm="ngForm" (ngSubmit)="wordSave(wordForm)">
+  <div>
+    <label for="word">Nome:</label>
+    <input type="text" id="word" name="word" required 
+      [(ngModel)]="palavra.word" #word="ngModel">
+
+    <div *ngIf="word.invalid && (word.dirty || word.touched)">
+           <p *ngIf="palavra.errors.required">Já existe essa palavra cadastrada!</p>
+    </div>
+  </div>
+
+  <div>
+    <label for="significado">E-mail:</label>
+    <input type="text" id="significado" name="significado" required
+      [(ngModel)]="palavra.significado" #significado="ngModel">
+  </div>
+  <input type="submit" value="Salvar" [disabled]="wordForm.invalid">
+</form>
+
+<div *ngIf="palavras.length > 0">
+
+      <div #estilo *ngFor="let x of palavras">
+        <p>{{ x.word }}</p>
+        <p>{{ x.significado }}</p>
+      </div>
+    
+</div>
